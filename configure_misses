@@ -1,0 +1,15 @@
+Configure miss: AIX
+Configure miss: x86_64-generic-linux-gnu-getconf
+Configure miss: _FILE_OFFSET_BITS
+Configure miss: _LARGEFILE_SOURCE
+Configure miss: _LARGE_FILES
+Configure miss: openpty
+Configure miss: union semun
+Configure miss: readline in -lreadline
+Configure miss: readline in -lreadline
+Configure miss: readline in -lreadline
+Configure miss: readline in -lreadline
+Configure miss: if malloc debugging is wanted
+Configure miss: ssl.h usability
+Configure miss: ssl.h presence
+Configure miss: ssl.h
