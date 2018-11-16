@@ -4,16 +4,17 @@
 #
 Name     : gftp
 Version  : 2.0.19
-Release  : 1
+Release  : 2
 URL      : https://www.gftp.org/gftp-2.0.19.tar.gz
 Source0  : https://www.gftp.org/gftp-2.0.19.tar.gz
 Summary  : Multithreaded FTP client for X Windows
 Group    : Development/Tools
 License  : GPL-2.0 MIT-enna
-Requires: gftp-bin
-Requires: gftp-data
-Requires: gftp-locales
-Requires: gftp-man
+Requires: gftp-bin = %{version}-%{release}
+Requires: gftp-data = %{version}-%{release}
+Requires: gftp-license = %{version}-%{release}
+Requires: gftp-locales = %{version}-%{release}
+Requires: gftp-man = %{version}-%{release}
 BuildRequires : bison
 BuildRequires : openssl-dev
 BuildRequires : pkgconfig(glib-2.0)
@@ -30,8 +31,9 @@ bookmarks menu, stop button, and many more features.
 %package bin
 Summary: bin components for the gftp package.
 Group: Binaries
-Requires: gftp-data
-Requires: gftp-man
+Requires: gftp-data = %{version}-%{release}
+Requires: gftp-license = %{version}-%{release}
+Requires: gftp-man = %{version}-%{release}
 
 %description bin
 bin components for the gftp package.
@@ -43,6 +45,14 @@ Group: Data
 
 %description data
 data components for the gftp package.
+
+
+%package license
+Summary: license components for the gftp package.
+Group: Default
+
+%description license
+license components for the gftp package.
 
 
 %package locales
@@ -69,7 +79,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1528105846
+export SOURCE_DATE_EPOCH=1542395679
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -81,8 +91,13 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1528105846
+export SOURCE_DATE_EPOCH=1542395679
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/gftp
+cp COPYING %{buildroot}/usr/share/package-licenses/gftp/COPYING
+cp debian/copyright %{buildroot}/usr/share/package-licenses/gftp/debian_copyright
+cp docs/sample.gftp/COPYING %{buildroot}/usr/share/package-licenses/gftp/docs_sample.gftp_COPYING
+cp lib/fsplib/COPYING %{buildroot}/usr/share/package-licenses/gftp/lib_fsplib_COPYING
 %make_install
 %find_lang gftp
 
@@ -133,8 +148,15 @@ rm -rf %{buildroot}
 /usr/share/gftp/world.xpm
 /usr/share/pixmaps/gftp.png
 
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/gftp/COPYING
+/usr/share/package-licenses/gftp/debian_copyright
+/usr/share/package-licenses/gftp/docs_sample.gftp_COPYING
+/usr/share/package-licenses/gftp/lib_fsplib_COPYING
+
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/man1/gftp.1
 
 %files locales -f gftp.lang

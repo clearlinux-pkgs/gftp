@@ -13,3 +13,4 @@ Configure miss: if malloc debugging is wanted
 Configure miss: ssl.h usability
 Configure miss: ssl.h presence
 Configure miss: ssl.h
+Configure miss: SSL_library_init in -lssl
