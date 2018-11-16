@@ -4,7 +4,7 @@
 #
 Name     : gftp
 Version  : 2.0.19
-Release  : 2
+Release  : 3
 URL      : https://www.gftp.org/gftp-2.0.19.tar.gz
 Source0  : https://www.gftp.org/gftp-2.0.19.tar.gz
 Summary  : Multithreaded FTP client for X Windows
