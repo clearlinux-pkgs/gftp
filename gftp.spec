@@ -4,10 +4,10 @@
 #
 Name     : gftp
 Version  : 2.0.19
-Release  : 3
+Release  : 4
 URL      : https://www.gftp.org/gftp-2.0.19.tar.gz
 Source0  : https://www.gftp.org/gftp-2.0.19.tar.gz
-Summary  : Multithreaded FTP client for X Windows
+Summary  : A multithreaded ftp client for X Windows
 Group    : Development/Tools
 License  : GPL-2.0 MIT-enna
 Requires: gftp-bin = %{version}-%{release}
@@ -79,7 +79,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1542395679
+export SOURCE_DATE_EPOCH=1550154889
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -91,7 +91,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1542395679
+export SOURCE_DATE_EPOCH=1550154889
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/gftp
 cp COPYING %{buildroot}/usr/share/package-licenses/gftp/COPYING
