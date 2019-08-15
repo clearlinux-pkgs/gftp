@@ -1,0 +1,26 @@
+From 8352ab89b114d9f9a21401e2218216d32a66c732 Mon Sep 17 00:00:00 2001
+From: santoshkumar <santoshkumar.laxminarayan.rai@intel.com>
+Date: Thu, 15 Aug 2019 11:22:29 +0800
+Subject: [PATCH] removed stropts.h checking
+
+---
+ lib/pty.c | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/lib/pty.c b/lib/pty.c
+index b22e64a..7502b91 100644
+--- a/lib/pty.c
++++ b/lib/pty.c
+@@ -61,9 +61,6 @@ _gftp_ptys_open (int fdm, int fds, char *pts_name)
+ 
+ #elif HAVE_GRANTPT
+ 
+-#if !(defined(__FreeBSD__) || defined(__NetBSD__) || defined(__APPLE__))
+-#include <stropts.h>
+-#endif
+ 
+ char *
+ gftp_get_pty_impl (void)
+-- 
+2.22.0
+

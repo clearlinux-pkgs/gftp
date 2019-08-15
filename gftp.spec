@@ -4,10 +4,10 @@
 #
 Name     : gftp
 Version  : 2.0.19
-Release  : 4
+Release  : 5
 URL      : https://www.gftp.org/gftp-2.0.19.tar.gz
 Source0  : https://www.gftp.org/gftp-2.0.19.tar.gz
-Summary  : A multithreaded ftp client for X Windows
+Summary  : Multithreaded FTP client for X Windows
 Group    : Development/Tools
 License  : GPL-2.0 MIT-enna
 Requires: gftp-bin = %{version}-%{release}
@@ -20,6 +20,7 @@ BuildRequires : openssl-dev
 BuildRequires : pkgconfig(glib-2.0)
 BuildRequires : pkgconfig(gtk+-2.0)
 BuildRequires : readline-dev
+Patch1: 0001-removed-stropts.h-checking.patch
 
 %description
 gFTP is a multithreaded FTP client for X Windows written using Gtk. It
@@ -33,7 +34,6 @@ Summary: bin components for the gftp package.
 Group: Binaries
 Requires: gftp-data = %{version}-%{release}
 Requires: gftp-license = %{version}-%{release}
-Requires: gftp-man = %{version}-%{release}
 
 %description bin
 bin components for the gftp package.
@@ -73,25 +73,31 @@ man components for the gftp package.
 
 %prep
 %setup -q -n gftp-2.0.19
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1550154889
-%configure --disable-static
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1565840047
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
+%configure --disable-static HAVE_GRANTPT --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1550154889
+export SOURCE_DATE_EPOCH=1565840047
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/gftp
 cp COPYING %{buildroot}/usr/share/package-licenses/gftp/COPYING
