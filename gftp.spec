@@ -4,7 +4,7 @@
 #
 Name     : gftp
 Version  : 2.0.19
-Release  : 7
+Release  : 8
 URL      : https://www.gftp.org/gftp-2.0.19.tar.gz
 Source0  : https://www.gftp.org/gftp-2.0.19.tar.gz
 Summary  : Multithreaded FTP client for X Windows
@@ -73,6 +73,7 @@ man components for the gftp package.
 
 %prep
 %setup -q -n gftp-2.0.19
+cd %{_builddir}/gftp-2.0.19
 %patch1 -p1
 
 %build
@@ -80,11 +81,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1565840047
+export SOURCE_DATE_EPOCH=1605556401
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 %configure --disable-static HAVE_GRANTPT --disable-static
 make  %{?_smp_mflags}
@@ -94,16 +95,16 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1565840047
+export SOURCE_DATE_EPOCH=1605556401
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/gftp
-cp COPYING %{buildroot}/usr/share/package-licenses/gftp/COPYING
-cp debian/copyright %{buildroot}/usr/share/package-licenses/gftp/debian_copyright
-cp docs/sample.gftp/COPYING %{buildroot}/usr/share/package-licenses/gftp/docs_sample.gftp_COPYING
-cp lib/fsplib/COPYING %{buildroot}/usr/share/package-licenses/gftp/lib_fsplib_COPYING
+cp %{_builddir}/gftp-2.0.19/COPYING %{buildroot}/usr/share/package-licenses/gftp/37c01a87da4e19f81cd3fc0737cd940a7cded1a9
+cp %{_builddir}/gftp-2.0.19/debian/copyright %{buildroot}/usr/share/package-licenses/gftp/1138cf2b130227bbbd900de4b9623e6979fe228f
+cp %{_builddir}/gftp-2.0.19/docs/sample.gftp/COPYING %{buildroot}/usr/share/package-licenses/gftp/37c01a87da4e19f81cd3fc0737cd940a7cded1a9
+cp %{_builddir}/gftp-2.0.19/lib/fsplib/COPYING %{buildroot}/usr/share/package-licenses/gftp/706ec3c180e0673bd37a8752d2b10008b54e9320
 %make_install
 %find_lang gftp
 
@@ -156,10 +157,9 @@ cp lib/fsplib/COPYING %{buildroot}/usr/share/package-licenses/gftp/lib_fsplib_CO
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/gftp/COPYING
-/usr/share/package-licenses/gftp/debian_copyright
-/usr/share/package-licenses/gftp/docs_sample.gftp_COPYING
-/usr/share/package-licenses/gftp/lib_fsplib_COPYING
+/usr/share/package-licenses/gftp/1138cf2b130227bbbd900de4b9623e6979fe228f
+/usr/share/package-licenses/gftp/37c01a87da4e19f81cd3fc0737cd940a7cded1a9
+/usr/share/package-licenses/gftp/706ec3c180e0673bd37a8752d2b10008b54e9320
 
 %files man
 %defattr(0644,root,root,0755)
